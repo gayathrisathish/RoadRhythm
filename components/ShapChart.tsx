@@ -30,7 +30,7 @@ export function ShapChart({ data }: ShapChartProps) {
               axisLine={false}
               tickLine={false}
             />
-            <Bar dataKey="value" radius={3} barSize={6}>
+            <Bar dataKey="value" radius={3} barSize={6} background={{ fill: "var(--shap-track)" }}>
               {data.map((item) => (
                 <Cell key={item.feature} fill={colorFromValue(item.value)} />
               ))}
@@ -40,7 +40,7 @@ export function ShapChart({ data }: ShapChartProps) {
       </div>
       <div className="mt-1 space-y-1">
         {data.map((item) => (
-          <div key={item.feature} className="flex items-center justify-between text-[11px] font-normal text-muted">
+          <div key={item.feature} className="flex items-center justify-between text-[12.5px] font-normal text-muted">
             <span>{item.feature}</span>
             <span style={{ color: colorFromValue(item.value) }}>{item.value.toFixed(2)}</span>
           </div>

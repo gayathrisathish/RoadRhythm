@@ -34,7 +34,7 @@ export function Sidebar({
 
           <div className="space-y-3">
             <div className="space-y-2">
-              <p className="text-xs font-normal text-muted">Day of week</p>
+              <p className="text-[12px] font-normal text-muted">Day of week</p>
               <select
                 value={dayOfWeek}
                 onChange={(event) => onDayChange(Number(event.target.value))}
@@ -49,9 +49,18 @@ export function Sidebar({
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-normal text-muted">Departure hour</p>
-                <span className="font-mono-metric text-xs font-medium text-primary">{formatHour(hour)}</span>
+              <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                <p style={{ fontSize: "11px", color: "#8B949E", fontWeight: 400 }}>Departure hour</p>
+                <span
+                  style={{
+                    fontSize: "13px",
+                    color: "#7D8590",
+                    fontWeight: 500,
+                    fontFamily: "var(--font-jetbrains), monospace",
+                  }}
+                >
+                  {formatHour(hour)}
+                </span>
               </div>
               <input
                 value={hour}
@@ -64,7 +73,7 @@ export function Sidebar({
             </div>
 
             <div className="space-y-2">
-              <p className="text-xs font-normal text-muted">Weather condition</p>
+              <p className="text-[12px] font-normal text-muted">Weather condition</p>
               <select
                 value={weather}
                 onChange={(event) => onWeatherChange(event.target.value as SidebarProps["weather"])}
@@ -79,10 +88,12 @@ export function Sidebar({
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-normal text-muted">Temperature</p>
-                <span className="font-mono-metric text-xs font-medium text-primary">
-                  {temp}K / {kelvinToF(temp)}F
+              <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                <p style={{ fontSize: "11px", color: "#8B949E", fontWeight: 400 }}>Temperature</p>
+                <span style={{ fontSize: "13px", fontWeight: 500, fontFamily: "var(--font-jetbrains), monospace" }}>
+                  <span style={{ color: "#7D8590" }}>{temp}K</span>
+                  <span style={{ color: "#484F58", margin: "0 4px" }}>/</span>
+                  <span style={{ color: "#7D8590" }}>{kelvinToF(temp)}°F</span>
                 </span>
               </div>
               <input
@@ -104,7 +115,7 @@ export function Sidebar({
 
         <section>
           <p className="section-label">Model Info</p>
-          <div className="space-y-1 text-[11px] font-normal leading-[1.6] text-muted">
+          <div className="space-y-1 text-[12px] font-normal leading-[1.6] text-muted">
             <p>Algorithm: Gradient Boosted Trees</p>
             <p>F1 score: 0.91 (macro)</p>
             <p>Split type: Temporal holdout</p>

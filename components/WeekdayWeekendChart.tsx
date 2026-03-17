@@ -92,10 +92,10 @@ function CustomTooltip({ active, payload, label }: TooltipProps) {
 function CustomLegend() {
   return (
     <div className="flex justify-center gap-4 pt-1">
-      <span className="text-[10px]" style={{ color: "#F85149" }}>
+      <span className="text-[11px]" style={{ color: "#F85149" }}>
         — Weekday avg
       </span>
-      <span className="text-[10px]" style={{ color: "#58A6FF" }}>
+      <span className="text-[11px]" style={{ color: "#58A6FF" }}>
         — Weekend avg
       </span>
     </div>
@@ -104,9 +104,10 @@ function CustomLegend() {
 
 export function WeekdayWeekendChart() {
   return (
-    <section className="rounded-lg border border-border bg-surface p-4">
+    <section className="flex min-h-0 flex-1 flex-col rounded-lg border border-border bg-surface p-4">
       <p className="section-label">Weekday vs Weekend Traffic Patterns</p>
-      <ResponsiveContainer width="100%" height={160}>
+      <div className="min-h-[140px] flex-1" style={{ minHeight: 140 }}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={CHART_DATA} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} stroke="#21262D" strokeDasharray="3 3" />
           <XAxis
@@ -152,6 +153,7 @@ export function WeekdayWeekendChart() {
           <Legend content={<CustomLegend />} />
         </LineChart>
       </ResponsiveContainer>
+      </div>
     </section>
   );
 }

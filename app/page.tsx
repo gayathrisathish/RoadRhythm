@@ -27,11 +27,11 @@ import {
 } from "@/lib/utils";
 
 const STATIC_ANOMALIES: AnomalyEvent[] = [
-  { id: "a1", date: "Mar 14 08:22", description: "Accident — I-94 EB near mile marker 52, 3-lane closure", impactPct: 41 },
-  { id: "a2", date: "Mar 13 17:05", description: "Volume spike — Friday eve, Packers game day traffic", impactPct: 29 },
-  { id: "a3", date: "Mar 12 06:47", description: "Freezing rain — roadway sensor loss, forced re-routing", impactPct: 55 },
-  { id: "a4", date: "Mar 11 07:58", description: "Construction closure — ramp WB 94 exit 34 blocked", impactPct: 18 },
-  { id: "a5", date: "Mar 09 16:30", description: "Volume surge — White Sox opening weekend, peak 22% above model", impactPct: 22 },
+  { id: "a1", date: "Mar 14 08:22", description: "Critical queue spillback — Kathipara Junction inbound", impactPct: 41, severity: "critical" },
+  { id: "a2", date: "Mar 13 17:05", description: "Signal failure cluster — OMR corridor evening outbound", impactPct: 29, severity: "high" },
+  { id: "a3", date: "Mar 12 06:47", description: "Rain surge delay — Guindy to Saidapet arterial", impactPct: 24, severity: "medium" },
+  { id: "a4", date: "Mar 11 07:58", description: "Ramp merge friction — Mount Road flyover approach", impactPct: 18, severity: "high" },
+  { id: "a5", date: "Mar 09 16:30", description: "Localized lane blockage — Velachery MRTS underpass", impactPct: 22, severity: "medium" },
 ];
 
 const STATIC_SHAP: ShapDriver[] = [
@@ -114,10 +114,19 @@ export default function Dashboard() {
           ? "#F85149"
           : "#BC8CFF";
 
+  const latestAlertLabel = STATIC_ANOMALIES[0]?.severity === "critical" ? "CHENNAI LIVE" : "SEVERE ALERT";
+
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-canvas">
-      <TopBar />
-      <div className="flex flex-1 overflow-hidden">
+      <TopBar alertLabel={latestAlertLabel} />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "240px 1fr",
+          minHeight: "560px",
+        }}
+        className="flex-1 overflow-hidden"
+      >
         <Sidebar
           dayOfWeek={inputs.dayOfWeek}
           hour={inputs.hour}
@@ -158,11 +167,11 @@ export default function Dashboard() {
           </div>
 
           {/* Row 2 — Heatmap left | SHAP + Probability + WeekdayWeekend right */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="bottom-grid">
             <div className="flex flex-col gap-3">
-              <CongestionHeatmap matrix={heatmap} />
+              <CongestionHeatmap matrix={heatmap} selectedHour={inputs.hour} selectedDay={inputs.dayOfWeek} />
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex h-full flex-col gap-3">
               <ShapChart data={STATIC_SHAP} />
               <div className="rounded-lg border border-border bg-surface p-4">
                 <p className="section-label">Class Probabilities</p>

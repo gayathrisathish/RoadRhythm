@@ -47,7 +47,7 @@ export function RiskScoreCard({ probabilities, weather, hour, confidence, loadin
     <article
       className={`rounded-lg border border-border bg-surface p-4 transition-[border-color] duration-150 ease-in-out hover:border-[#484F58] ${loading ? "metric-loading" : ""}`}
     >
-      <p className="section-label">Congestion Risk Score</p>
+      <p className="section-label !text-[10px]">Congestion Risk Score</p>
 
       <div className="font-mono-metric text-[28px] font-medium leading-none" style={{ color }}>
         {riskScore}

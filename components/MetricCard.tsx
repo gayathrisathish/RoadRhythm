@@ -23,7 +23,7 @@ export function CongestionBadge({ level, text }: { level: CongestionLabel; text?
           : "bg-severe text-severe-foreground border-severe-border";
 
   return (
-    <span className={`inline-flex rounded-full border px-2 py-[2px] text-[10px] font-medium tracking-[0.06em] ${tone}`}>
+    <span className={`inline-flex rounded-full border px-2 py-[2px] text-[11px] font-medium tracking-[0.06em] ${tone}`}>
       {text ?? getBadgeText(level)}
     </span>
   );
@@ -36,8 +36,8 @@ export function MetricCard({ label, value, subtitle, loading, badgeLevel, badgeT
         loading ? "metric-loading" : ""
       }`}
     >
-      <p className="section-label">{label}</p>
-      <div className="mb-2 font-mono-metric text-[22px] font-medium leading-none text-primary">{value}</div>
+      <p className="section-label !text-[10px]">{label}</p>
+      <div className="mb-2 font-mono-metric text-[26px] font-medium leading-none text-primary">{value}</div>
       <p className="text-xs font-normal text-muted">{subtitle}</p>
       {badgeLevel ? (
         <div className="mt-2">

@@ -112,7 +112,7 @@ export function PeakCalendar({ weather, temp }: PeakCalendarProps) {
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "4px" }}>
         {cells.map((date, idx) => {
           if (!date) return <div key={`_${idx}`} className="h-9 rounded-[4px]" />;
 
@@ -128,8 +128,12 @@ export function PeakCalendar({ weather, temp }: PeakCalendarProps) {
           return (
             <div
               key={key}
-              className="relative h-9 rounded-[4px] p-1"
+              className="relative h-9"
               style={{
+                borderRadius: "4px",
+                padding: "5px 3px",
+                textAlign: "center",
+                cursor: "pointer",
                 background: LEVEL_BG[level],
                 border: isToday ? "0.5px solid #E6EDF3" : "0.5px solid transparent",
               }}

@@ -35,6 +35,7 @@ export interface AnomalyEvent {
   date: string;
   description: string;
   impactPct: number;
+  severity?: "critical" | "high" | "medium";
 }
 
 export interface ShapDriver {
