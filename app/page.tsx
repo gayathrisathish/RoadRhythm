@@ -108,6 +108,7 @@ const ISOLATION_FOREST = [
 
 export default function Dashboard() {
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [inputs, setInputs] = useState(DEFAULT_STATE);
   const [congestionLevel, setCongestionLevel] = useState<PredictResponse["congestion_level"]>(DEFAULT_PREDICTION.congestion_level);
   const [confidence, setConfidence] = useState(DEFAULT_PREDICTION.confidence);
@@ -117,10 +118,11 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"predictor" | "patterns" | "anomalies">("predictor");
 
-  const isDark =
-    typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : (resolvedTheme ?? "dark") === "dark";
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
 
   const c = {
     canvas: isDark ? "#0D1117" : "#F6F8FA",

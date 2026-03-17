@@ -16,10 +16,7 @@ export function TopBar({ alertLabel }: TopBarProps) {
     setMounted(true);
   }, []);
 
-  const isDark =
-    typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : (resolvedTheme ?? "dark") === "dark";
+  const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
     <header className="h-12 border-b border-border bg-surface px-4">

@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { formatHour } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
@@ -10,10 +12,13 @@ interface CommuteAdvisorProps {
 
 export function CommuteAdvisor({ bestHour, savedMinutes }: CommuteAdvisorProps) {
   const { resolvedTheme } = useTheme();
-  const isDark =
-    typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : (resolvedTheme ?? "dark") === "dark";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
     <div
