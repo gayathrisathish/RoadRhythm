@@ -50,11 +50,11 @@ export function Sidebar({
 
             <div className="space-y-2">
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                <p style={{ fontSize: "11px", color: "#8B949E", fontWeight: 400 }}>Departure hour</p>
+                <p style={{ fontSize: "11px", color: "var(--muted)", fontWeight: 400 }}>Departure hour</p>
                 <span
                   style={{
                     fontSize: "13px",
-                    color: "#7D8590",
+                    color: "var(--muted)",
                     fontWeight: 500,
                     fontFamily: "var(--font-jetbrains), monospace",
                   }}
@@ -89,11 +89,11 @@ export function Sidebar({
 
             <div className="space-y-2">
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                <p style={{ fontSize: "11px", color: "#8B949E", fontWeight: 400 }}>Temperature</p>
+                <p style={{ fontSize: "11px", color: "var(--muted)", fontWeight: 400 }}>Temperature</p>
                 <span style={{ fontSize: "13px", fontWeight: 500, fontFamily: "var(--font-jetbrains), monospace" }}>
-                  <span style={{ color: "#7D8590" }}>{temp}K</span>
-                  <span style={{ color: "#484F58", margin: "0 4px" }}>/</span>
-                  <span style={{ color: "#7D8590" }}>{kelvinToF(temp)}°F</span>
+                  <span style={{ color: "var(--muted)" }}>{temp}K</span>
+                  <span style={{ color: "var(--border)", margin: "0 4px" }}>/</span>
+                  <span style={{ color: "var(--muted)" }}>{kelvinToF(temp)}°F</span>
                 </span>
               </div>
               <input

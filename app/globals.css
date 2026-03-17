@@ -28,6 +28,17 @@
   --heatmap-overlay: rgba(255, 255, 255, 0.08);
 }
 
+:root[class~="light"],
+.light {
+  --canvas: #F6F8FA;
+  --surface: #FFFFFF;
+  --elevated: #F0F2F4;
+  --border: #D0D7DE;
+  --muted: #57606A;
+  --primary: #1F2328;
+  --accent: #0969DA;
+}
+
 .dark {
   --canvas: #0D1117;
   --surface: #161B22;

@@ -39,7 +39,14 @@ export function TopBar({ alertLabel }: TopBarProps) {
         </div>
         <div className="flex items-center gap-3 text-[12px] font-normal">
           <p className="text-muted">Chennai Metropolitan Area</p>
-          <span className="rounded-full border border-[#DA3633] bg-[#2D0E0E] px-2 py-[2px] text-[11px] font-medium text-[#F85149]">
+          <span
+            className="rounded-full px-2 py-[2px] text-[11px] font-medium"
+            style={{
+              border: `0.5px solid ${isDark ? "#DA3633" : "#FF8182"}`,
+              background: isDark ? "#2D0E0E" : "#FFEBE9",
+              color: isDark ? "#F85149" : "#CF222E",
+            }}
+          >
             {alertLabel}
           </span>
           <button
