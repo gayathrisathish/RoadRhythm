@@ -5,10 +5,13 @@ import { useCallback, useEffect, useState } from "react";
 import { AnomalyFeed } from "@/components/AnomalyFeed";
 import { CongestionHeatmap } from "@/components/CongestionHeatmap";
 import { MetricCard } from "@/components/MetricCard";
+import { PeakCalendar } from "@/components/PeakCalendar";
 import { ProbabilityBars } from "@/components/ProbabilityBars";
+import { RiskScoreCard } from "@/components/RiskScoreCard";
 import { ShapChart } from "@/components/ShapChart";
 import { Sidebar } from "@/components/Sidebar";
 import { TopBar } from "@/components/TopBar";
+import { WeekdayWeekendChart } from "@/components/WeekdayWeekendChart";
 import {
   type AnomalyEvent,
   type PredictResponse,
@@ -129,6 +132,7 @@ export default function Dashboard() {
         />
 
         <main className="flex flex-1 flex-col gap-3 overflow-y-auto bg-canvas p-4">
+          {/* Row 1 — 3 metric cards */}
           <div className="grid grid-cols-3 gap-3">
             <MetricCard
               label="Predicted Volume"
@@ -144,27 +148,35 @@ export default function Dashboard() {
               badgeLevel={prediction.congestion_level}
               badgeText={getBadgeText(prediction.congestion_level)}
             />
-            <MetricCard
-              label="Model Confidence"
-              value={<span style={{ color: "#58A6FF" }}>{prediction.confidence}%</span>}
-              subtitle="Gradient Boosted Trees"
+            <RiskScoreCard
+              probabilities={prediction.probabilities}
+              weather={inputs.weather}
+              hour={inputs.hour}
+              confidence={prediction.confidence}
               loading={loading}
             />
           </div>
 
-          <div className="grid flex-1 grid-cols-2 gap-3">
+          {/* Row 2 — Heatmap left | SHAP + Probability + WeekdayWeekend right */}
+          <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-3">
               <CongestionHeatmap matrix={heatmap} />
+            </div>
+            <div className="flex flex-col gap-3">
+              <ShapChart data={STATIC_SHAP} />
               <div className="rounded-lg border border-border bg-surface p-4">
                 <p className="section-label">Class Probabilities</p>
                 <ProbabilityBars probabilities={prediction.probabilities} />
               </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <ShapChart data={STATIC_SHAP} />
-              <AnomalyFeed events={STATIC_ANOMALIES} />
+              <WeekdayWeekendChart />
             </div>
           </div>
+
+          {/* Row 3 — Full-width peak calendar */}
+          <PeakCalendar weather={inputs.weather} temp={inputs.temp} />
+
+          {/* Row 4 — Full-width anomaly feed */}
+          <AnomalyFeed events={STATIC_ANOMALIES} />
         </main>
       </div>
     </div>
