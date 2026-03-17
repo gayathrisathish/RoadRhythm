@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #0D1117;
+  color: #E6EDF3;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.section-label {
+  margin-bottom: 8px;
+  color: #7D8590;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dashboard-select {
+  width: 100%;
+  border: 0.5px solid #30363D;
+  background: #21262D;
+  border-radius: 6px;
+  color: #E6EDF3;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 400;
+  appearance: none;
+}
+
+.dashboard-select:focus {
+  outline: none;
+  border-color: #58A6FF;
+}
+
+.dashboard-range {
+  width: 100%;
+  appearance: none;
+  background: transparent;
+}
+
+.dashboard-range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: #21262D;
+}
+
+.dashboard-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  margin-top: -5.5px;
+  border: none;
+  background: #58A6FF;
+  box-shadow: none;
+}
+
+.dashboard-range::-moz-range-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: #21262D;
+}
+
+.dashboard-range::-moz-range-progress {
+  height: 3px;
+  border-radius: 9999px;
+  background: #58A6FF;
+}
+
+.dashboard-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 9999px;
+  background: #58A6FF;
+  box-shadow: none;
+}
+
+.metric-loading {
+  animation: metric-fade 300ms ease infinite;
+}
+
+@keyframes metric-fade {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
