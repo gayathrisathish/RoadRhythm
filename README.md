@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Overview
 
-## Getting Started
+RoadRhythm is a full-stack traffic intelligence system with:
 
-First, run the development server:
+- A modern web dashboard for scenario-based prediction
+- A machine learning inference API
+- Explainability and probability outputs for transparent decisions
+- Pattern and anomaly views for operational awareness
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The platform helps answer:
+- What congestion level should I expect?
+- How confident is the prediction?
+- What is the best departure hour to reduce delay?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dashboard Screenshots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Live Predictor
+![Live Predictor](screenshots/live-predictor.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Pattern Intelligence
+![Pattern Intelligence](screenshots/pattern-intelligence.png)
 
-## Learn More
+### Anomaly Command
+![Anomaly Command](screenshots/anomaly-command.png)
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- Live Predictor
+- Pattern Intelligence
+- Anomaly Command
+- Smart Commute Advisor
+- SHAP-based model explainability
+- Class probability visualization
+- Light and dark mode UI
+- API-backed real-time prediction flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js 14 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Recharts
+- next-themes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Backend
+
+- FastAPI
+- scikit-learn
+- XGBoost
+- NumPy
+- joblib
+- Pydantic
+
+Deployment
+
+- Frontend: Vercel
+- Backend: Railway
+
+## Project Structure
+
+- app: Next.js routes and pages
+- components: reusable UI components
+- lib: shared types and utility helpers
+- backend: FastAPI service and model runtime files
+
+## Architecture Flow
+
+1. User changes scenario inputs: day, hour, weather, temperature
+2. Frontend derives features such as is_weekend and is_rush_hour
+3. Frontend sends request to backend prediction endpoint
+4. Backend returns:
+    - congestion_level
+    - confidence
+    - probabilities
+    - best_hour
+    - predicted_volume
+5. Dashboard updates cards, charts, and advisor recommendations
+
+## API Contract
+
+POST /predict
+
+Request body
+
+- hour: integer
+- day_of_week: integer
+- is_weekend: integer (0 or 1)
+- is_rush_hour: integer (0 or 1)
+- weather_severity: integer
+- temp: float
+
+Response
+
+- congestion_level: Low | Medium | High | Severe
+- confidence: integer (0 to 100)
+- probabilities:
+    - Low
+    - Medium
+    - High
+    - Severe
+- best_hour: integer
+- predicted_volume: integer
+
+GET /health
+
+- Returns status ok
+
+## Environment Variables
+
+Frontend environment variable:
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+For production, set NEXT_PUBLIC_API_URL to your Railway backend URL.
+
+## Local Setup
+
+### 1) Clone and install frontend dependencies
+
+- npm install
+
+### 2) Run frontend
+
+- npm run dev
+
+### 3) Setup backend
+
+- Go to backend folder
+- Install Python dependencies:
+pip install -r requirements.txt
+
+### 4) Start backend
+
+- uvicorn main:app --reload --port 8000
+
+### 5) Open app
+
+- Frontend: [http://localhost:3000](http://localhost:3000/)
+- Backend health: http://localhost:8000/health
+
+## Deployment Notes
+
+Vercel
+
+- Deploy frontend from main branch
+- Add NEXT_PUBLIC_API_URL in Vercel project environment variables
+
+Railway
+
+- Deploy backend folder
+- Use start command:
+uvicorn main:app --host 0.0.0.0 --port $PORT
+- Ensure model.joblib is available in backend runtime
+
+## Known Notes
+
+- Recharts can show non-fatal width/height warnings during static generation
+- If UI changes do not reflect after deploy, force refresh browser cache
+
+## Future Improvements
+
+- Live traffic stream ingestion
+- Geo-map corridor visualization
+- Alert subscriptions
+- Continuous retraining and model drift monitoring
