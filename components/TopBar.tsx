@@ -9,14 +9,17 @@ interface TopBarProps {
 }
 
 export function TopBar({ alertLabel }: TopBarProps) {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const isDark = (theme ?? "dark") === "dark";
+  const isDark =
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : (resolvedTheme ?? "dark") === "dark";
 
   return (
     <header className="h-12 border-b border-border bg-surface px-4">

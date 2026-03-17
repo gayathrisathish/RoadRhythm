@@ -107,7 +107,7 @@ const ISOLATION_FOREST = [
 ];
 
 export default function Dashboard() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [inputs, setInputs] = useState(DEFAULT_STATE);
   const [congestionLevel, setCongestionLevel] = useState<PredictResponse["congestion_level"]>(DEFAULT_PREDICTION.congestion_level);
   const [confidence, setConfidence] = useState(DEFAULT_PREDICTION.confidence);
@@ -117,7 +117,10 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"predictor" | "patterns" | "anomalies">("predictor");
 
-  const isDark = theme === "dark";
+  const isDark =
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : (resolvedTheme ?? "dark") === "dark";
 
   const c = {
     canvas: isDark ? "#0D1117" : "#F6F8FA",

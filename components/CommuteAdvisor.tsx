@@ -9,8 +9,11 @@ interface CommuteAdvisorProps {
 }
 
 export function CommuteAdvisor({ bestHour, savedMinutes }: CommuteAdvisorProps) {
-  const { theme } = useTheme();
-  const isDark = (theme ?? "dark") === "dark";
+  const { resolvedTheme } = useTheme();
+  const isDark =
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : (resolvedTheme ?? "dark") === "dark";
 
   return (
     <div
